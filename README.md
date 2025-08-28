@@ -38,26 +38,46 @@ run `npm install`
 ```
 
 ### DB Setup
+
+#### 1. Create .env file
+Create a `.env` file in the root directory with the following content:
+
+**For MySQL:**
 ```bash
-# Generate Prisma client
-npx prisma generate
-
-# Run database migrations
-npx prisma migrate dev --name init
-```
-
-### Create .env file
-
-!! Be sure to replace username and password variables in .env DATABASE_URL !!
-
-```bash
-# Database
-DATABASE_URL="mysql://<username>:<password>@localhost:3306/todoapp"
+# Database (replace with your actual MySQL credentials)
+DATABASE_URL="mysql://your_username:your_password@localhost:3306/todoapp"
 
 # Server
 PORT=3001
 NODE_ENV=development
 ```
+
+**For SQLite (simpler, no setup required):**
+```bash
+# Database (no credentials needed)
+DATABASE_URL="file:./dev.db"
+
+# Server
+PORT=3001
+NODE_ENV=development
+```
+
+# Generate Prisma client
+`npx prisma generate`
+
+# Create and run initial migration
+`npx prisma migrate dev --name init`
+
+# (Optional) Open Prisma Studio to view your database
+`npx prisma studio`
+
+**Note: If using MySQL, make sure you have:**
+
+- MySQL server running on your machine
+- Created a database named todoapp
+- Valid username/password with access to the database
+- Recommended: Use SQLite for development (no additional setup required)
+
 
 ### Start the development server
 `npm run dev`
@@ -80,7 +100,7 @@ The server will start on http://localhost:3001
 
 #### Project Structure
 ```bash
-backend/
+./
 ├── src/
 │   ├── controllers/     # Request handlers
 │   │   └── taskController.ts
